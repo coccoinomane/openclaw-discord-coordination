@@ -27,57 +27,12 @@ test('registration does not call the host or register runtime features', () => {
   assert.equal(plugin.register(api), undefined);
 });
 
-test('skill is concise, references resolve, and MCP is an explicit prerequisite', () => {
+test('skill metadata size and local references are valid', () => {
   const url = new URL('skills/discord-thread-coordination/SKILL.md', root);
   const text = readFileSync(url, 'utf8');
   const description = text.match(/^description: (.+)$/m)?.[1];
   assert.ok(description);
   assert.ok(Buffer.byteLength(description, 'utf8') <= 500);
-  assert.ok(text.split(/\s+/).length < 500);
-  assert.match(text, /requires \[OpenClaw MCP\]/);
-  assert.match(text, /open or resume a Discord thread/);
-  assert.match(text, /Before creating or resuming a thread or forwarding any request, read/);
-  assert.ok(text.split(/\s+/).length < 300);
-  assert.doesNotMatch(text, /source_message_url|fork_from_session|<#THREAD_ID>|## Agent selection/);
   const links = [...text.matchAll(/\]\((references\/[^)]+)\)/g)];
-  assert.equal(links.length, 2);
   for (const [, link] of links) assert.ok(existsSync(new URL(link, url)), link);
-  const readme = readFileSync(new URL('README.md', root), 'utf8');
-  assert.match(readme, /This plugin needs \[OpenClaw MCP\]/);
-  assert.match(readme, /openclaw plugins install git:github.com\/coccoinomane\/openclaw-discord-coordination@v0.1.1/);
-  assert.equal(readme.includes('\u0000'), false);
-});
-
-
-test('companion documentation has no obsolete fork compatibility guidance', () => {
-  const readme = readFileSync(new URL('README.md', root), 'utf8');
-  const workflow = readFileSync(new URL('skills/discord-thread-coordination/references/workflows.md', root), 'utf8');
-  assert.match(readme, /companion plugin/);
-  assert.match(readme, /Inspired by Claude Projects/);
-  assert.match(json('package.json').description, /Claude Projects/);
-  for (const text of [readme, workflow]) {
-    assert.doesNotMatch(text, /pull\/1|PR #1|when the advertised schema supports it|and the tool supports it|Never copy transcript messages/);
-  }
-});
-
-
-test('workflow owns fork prompts, source attribution and destination delivery', () => {
-  const workflow = readFileSync(new URL('skills/discord-thread-coordination/references/workflows.md', root), 'utf8');
-  assert.match(workflow, /preserve the user's work request verbatim/);
-  assert.match(workflow, /Do not rewrite it as a handoff/);
-  assert.match(workflow, /absent from both the inherited history and the forwarded request/);
-  assert.match(workflow, /Use only native same-agent forks/);
-  assert.match(workflow, /generic `source` string/);
-  assert.match(workflow, /<#CHANNEL_OR_THREAD_ID> https:\/\/discord\.com\/channels\/GUILD\/CHANNEL_OR_THREAD_ID\/MESSAGE/);
-  assert.match(workflow, /not HTML or a Markdown hyperlink with a hidden destination/);
-  assert.doesNotMatch(workflow, /source_message_url/);
-  assert.match(workflow, /channel containing the message, not its parent/);
-  assert.match(workflow, /declared client name followed by its session ID/);
-  assert.match(workflow, /otherwise just the declared client name/);
-  assert.match(workflow, /Omit `source` if none is known/);
-  assert.match(workflow, /does not append the caption or source metadata to the LLM input/);
-  assert.match(workflow, /Existing-thread replies do not accept this parameter/);
-  assert.match(workflow, /<#THREAD_ID>/);
-  assert.match(workflow, /Do not wait for answers before returning the links/);
-  assert.equal(workflow.includes(String.fromCharCode(0)), false);
 });

@@ -36,9 +36,7 @@ For a new-thread request, including a fork, fill the generic `source` string wit
 <#CHANNEL_OR_THREAD_ID> https://discord.com/channels/GUILD/CHANNEL_OR_THREAD_ID/MESSAGE
 ```
 
-Use a known permalink or construct it from trusted guild, channel/thread and message IDs. Use the channel containing the message, not its parent. Never invent IDs. If the exact message URL is unavailable, use the known client conversation URL, otherwise the declared client name followed by its session ID, otherwise just the declared client name. Omit `source` if none is known. Do not create a public sharing link merely to populate attribution.
-
-Keep this attribution separate from `prompt`. Supply plain text, not HTML or a Markdown hyperlink with a hidden destination. The MCP strips HTML tags and neutralizes formatting while preserving valid Discord channel tags and visible URLs; it does not append the caption or source metadata to the LLM input. Do not add your own forwarding header or copy the source into the prompt merely for attribution. A handoff may still need source references as working context. The source is visible to the destination audience, is caller-supplied and is not proof of identity or permission. Existing-thread replies do not accept this parameter.
+Omit `source` if none is known.
 
 ## Return the destination
 
