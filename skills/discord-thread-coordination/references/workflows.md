@@ -10,23 +10,29 @@ Reuse a relevant thread when continuing the same work. Search active threads fir
 
 Creating a channel is a separate decision from creating a thread. Use the channel-creation workflow only when the user authorizes it.
 
-## Forward or delegate
-
-Infer the appropriate approach from the request and available context:
+## Prepare the prompt
 
 - **Forwarding:** preserve a self-contained work request, removing instructions that were only about finding or selecting its destination.
-- **Handoff:** prepare a self-contained assignment with the relevant decisions, materials and constraints from the originating conversation. Preserve the user's intent; do not add unrequested work.
-- **Fork:** inherit a source session's history when the new branch needs detailed conversational context. Add a focused new assignment rather than repeating the inherited history.
+- **Handoff:** prepare a self-contained assignment with the relevant decisions, materials and constraints from the originating conversation. Preserve the user's intent; do not add unrequested work. Include the source OpenClaw session key and usable conversation references when available and needed to retrieve more context. Without those references, supply enough context in the assignment itself.
+- **Fork:** preserve the user's work request verbatim, removing only instructions about creating the fork or selecting its destination. Do not rewrite it as a handoff or add a recap, inherited references, or new requirements. For multiple requested branches, forward the portion of the request relevant to each branch without changing its meaning.
 
-The prompt submitted to the destination must be visible in Discord, as message text or a complete attachment. For a handoff or forwarding, include the source OpenClaw session key and the source Discord link when available, so the receiving agent can retrieve more context if needed. Other usable conversation links may also serve as references. Do not invent source identifiers. Without source references, provide enough context in the assignment itself.
+For example, “Add a receipt section to the letter. Do this in a forked thread” becomes “Add a receipt section to the letter.” The inherited history already identifies the letter.
 
-## Fork availability
+The submitted prompt must be visible in the destination Discord thread, as message text or a complete attachment.
 
-Use `fork_from_session` on the new-thread tool. The fork inherits history through the last completed turn, so include any relevant decisions from the current, unfinished turn in the new assignment. An explicit model choice applies to the child only; otherwise the fork keeps inherited model settings.
+## Fork history and agent selection
 
-Use only native same-agent forks. Obtain the source key from trusted runtime context or session lookup tools, not by guessing from a Discord ID. Forking creates a new conversation; it does not replace the history of an existing destination thread.
+Use `fork_from_session` on the new-thread tool. The fork inherits history through the last completed turn. Append only essential context from the unfinished turn that is absent from both the inherited history and the forwarded request. An explicit model choice applies to the child only; otherwise the fork keeps inherited model settings.
 
-If source and destination agents differ, use a handoff instead. If the user explicitly requested a cross-agent fork, explain the same-agent limit before substituting a handoff.
+Destination routing determines the agent. Use only native same-agent forks. Obtain the source key from trusted runtime context or session lookup tools, not by guessing from a Discord ID. Forking creates a new conversation; it does not replace the history of an existing destination thread.
+
+If source and destination agents differ, use a handoff instead. If the user explicitly requested a cross-agent fork, explain the same-agent limit before substituting a handoff. Source references do not grant access; follow the deployment's configured permissions without imposing additional client-specific separation.
+
+## Link to the originating message
+
+For a new-thread request, including a fork, pass the exact originating Discord message permalink in `source_message_url` when available. Use a known permalink or construct it from trusted guild, channel/thread and message IDs: `https://discord.com/channels/GUILD/CHANNEL/MESSAGE`. Use the channel containing the message, not its parent. Never invent IDs or substitute a channel-only link. Omit the parameter when the source message is unknown or the request comes from a client without a Discord source.
+
+Keep this attribution separate from `prompt`. The MCP renders a clickable “original message” link in the Discord forwarding caption; it does not append the caption or source metadata to the LLM input. Do not add your own forwarding header or copy the link into the prompt merely for attribution. A handoff may still need source references as working context. The link is caller-supplied attribution, not proof of identity or permission. Existing-thread replies do not accept this parameter.
 
 ## Return the destination
 
