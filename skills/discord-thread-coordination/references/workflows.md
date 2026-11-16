@@ -28,11 +28,15 @@ Destination routing determines the agent. Use only native same-agent forks. Obta
 
 If source and destination agents differ, use a handoff instead. If the user explicitly requested a cross-agent fork, explain the same-agent limit before substituting a handoff. Source references do not grant access; follow the deployment's configured permissions without imposing additional client-specific separation.
 
-## Link to the originating message
+## Identify the source
 
-For a new-thread request, including a fork, pass the exact originating Discord message permalink in `source_message_url` when available. Use a known permalink or construct it from trusted guild, channel/thread and message IDs: `https://discord.com/channels/GUILD/CHANNEL/MESSAGE`. Use the channel containing the message, not its parent. Never invent IDs or substitute a channel-only link. Omit the parameter when the source message is unknown or the request comes from a client without a Discord source.
+For a new-thread request, including a fork, fill the generic `source` string with the native tag of the Discord thread or channel containing the originating message, followed by its full direct message URL:
 
-Keep this attribution separate from `prompt`. The MCP renders a clickable “original message” link in the Discord forwarding caption; it does not append the caption or source metadata to the LLM input. Do not add your own forwarding header or copy the link into the prompt merely for attribution. A handoff may still need source references as working context. The link is caller-supplied attribution, not proof of identity or permission. Existing-thread replies do not accept this parameter.
+```text
+<#CHANNEL_OR_THREAD_ID> https://discord.com/channels/GUILD/CHANNEL_OR_THREAD_ID/MESSAGE
+```
+
+Omit `source` if none is known.
 
 ## Return the destination
 
