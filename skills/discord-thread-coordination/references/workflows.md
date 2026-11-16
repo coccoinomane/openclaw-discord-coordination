@@ -28,11 +28,17 @@ Destination routing determines the agent. Use only native same-agent forks. Obta
 
 If source and destination agents differ, use a handoff instead. If the user explicitly requested a cross-agent fork, explain the same-agent limit before substituting a handoff. Source references do not grant access; follow the deployment's configured permissions without imposing additional client-specific separation.
 
-## Link to the originating message
+## Identify the source
 
-For a new-thread request, including a fork, pass the exact originating Discord message permalink in `source_message_url` when available. Use a known permalink or construct it from trusted guild, channel/thread and message IDs: `https://discord.com/channels/GUILD/CHANNEL/MESSAGE`. Use the channel containing the message, not its parent. Never invent IDs or substitute a channel-only link. Omit the parameter when the source message is unknown or the request comes from a client without a Discord source.
+For a new-thread request, including a fork, fill the generic `source` string with the native tag of the Discord thread or channel containing the originating message, followed by its full direct message URL:
 
-Keep this attribution separate from `prompt`. The MCP renders a clickable “original message” link in the Discord forwarding caption; it does not append the caption or source metadata to the LLM input. Do not add your own forwarding header or copy the link into the prompt merely for attribution. A handoff may still need source references as working context. The link is caller-supplied attribution, not proof of identity or permission. Existing-thread replies do not accept this parameter.
+```text
+<#CHANNEL_OR_THREAD_ID> https://discord.com/channels/GUILD/CHANNEL_OR_THREAD_ID/MESSAGE
+```
+
+Use a known permalink or construct it from trusted guild, channel/thread and message IDs. Use the channel containing the message, not its parent. Never invent IDs. If the exact message URL is unavailable, use the known client conversation URL, otherwise the declared client name followed by its session ID, otherwise just the declared client name. Omit `source` if none is known. Do not create a public sharing link merely to populate attribution.
+
+Keep this attribution separate from `prompt`. Supply plain text, not HTML or a Markdown hyperlink with a hidden destination. The MCP strips HTML tags and neutralizes formatting while preserving valid Discord channel tags and visible URLs; it does not append the caption or source metadata to the LLM input. Do not add your own forwarding header or copy the source into the prompt merely for attribution. A handoff may still need source references as working context. The source is visible to the destination audience, is caller-supplied and is not proof of identity or permission. Existing-thread replies do not accept this parameter.
 
 ## Return the destination
 

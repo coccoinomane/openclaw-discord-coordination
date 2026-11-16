@@ -67,9 +67,14 @@ test('workflow owns fork prompts, source attribution and destination delivery', 
   assert.match(workflow, /Do not rewrite it as a handoff/);
   assert.match(workflow, /absent from both the inherited history and the forwarded request/);
   assert.match(workflow, /Use only native same-agent forks/);
-  assert.match(workflow, /source_message_url/);
+  assert.match(workflow, /generic `source` string/);
+  assert.match(workflow, /<#CHANNEL_OR_THREAD_ID> https:\/\/discord\.com\/channels\/GUILD\/CHANNEL_OR_THREAD_ID\/MESSAGE/);
+  assert.match(workflow, /not HTML or a Markdown hyperlink with a hidden destination/);
+  assert.doesNotMatch(workflow, /source_message_url/);
   assert.match(workflow, /channel containing the message, not its parent/);
-  assert.match(workflow, /Omit the parameter when the source message is unknown/);
+  assert.match(workflow, /declared client name followed by its session ID/);
+  assert.match(workflow, /otherwise just the declared client name/);
+  assert.match(workflow, /Omit `source` if none is known/);
   assert.match(workflow, /does not append the caption or source metadata to the LLM input/);
   assert.match(workflow, /Existing-thread replies do not accept this parameter/);
   assert.match(workflow, /<#THREAD_ID>/);
