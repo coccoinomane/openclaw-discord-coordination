@@ -1,0 +1,14 @@
+{
+  "id": "openclaw-discord-coordination",
+  "name": "Discord Coordination",
+  "version": "0.1.0",
+  "description": "Discord thread and session coordination guidance. Requires OpenClaw MCP configured with Discord tools.",
+  "skills": [
+    "./skills"
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

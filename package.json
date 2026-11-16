@@ -1,0 +1,26 @@
+{
+  "name": "openclaw-discord-coordination",
+  "version": "0.1.0",
+  "description": "OpenClaw skill for Discord thread coordination through OpenClaw MCP",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "openclaw.plugin.json",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coccoinomane/openclaw-discord-coordination.git"
+  }
+}
