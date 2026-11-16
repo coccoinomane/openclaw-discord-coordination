@@ -30,10 +30,10 @@ If source and destination agents differ, use a handoff instead. If the user expl
 
 ## Identify the source
 
-For a new-thread request, including a fork, fill the generic `source` string with the native tag of the Discord thread or channel containing the originating message, followed by its full direct message URL:
+For a new-thread request, including a fork, set `source` to the full direct URL of the originating Discord message:
 
 ```text
-<#CHANNEL_OR_THREAD_ID> https://discord.com/channels/GUILD/CHANNEL_OR_THREAD_ID/MESSAGE
+https://discord.com/channels/GUILD/CHANNEL_OR_THREAD_ID/MESSAGE
 ```
 
 Omit `source` if none is known.
