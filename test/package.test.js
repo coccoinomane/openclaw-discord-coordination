@@ -36,7 +36,9 @@ test('skill is concise, references resolve, and MCP is an explicit prerequisite'
   assert.ok(text.split(/\s+/).length < 500);
   assert.match(text, /requires \[OpenClaw MCP\]/);
   assert.match(text, /open or resume a Discord thread/);
-  assert.match(text, /<#THREAD_ID>/);
+  assert.match(text, /Before creating or resuming a thread or forwarding any request, read/);
+  assert.ok(text.split(/\s+/).length < 300);
+  assert.doesNotMatch(text, /source_message_url|fork_from_session|<#THREAD_ID>|## Agent selection/);
   const links = [...text.matchAll(/\]\((references\/[^)]+)\)/g)];
   assert.equal(links.length, 2);
   for (const [, link] of links) assert.ok(existsSync(new URL(link, url)), link);
@@ -56,4 +58,21 @@ test('companion documentation has no obsolete fork compatibility guidance', () =
   for (const text of [readme, workflow]) {
     assert.doesNotMatch(text, /pull\/1|PR #1|when the advertised schema supports it|and the tool supports it|Never copy transcript messages/);
   }
+});
+
+
+test('workflow owns fork prompts, source attribution and destination delivery', () => {
+  const workflow = readFileSync(new URL('skills/discord-thread-coordination/references/workflows.md', root), 'utf8');
+  assert.match(workflow, /preserve the user's work request verbatim/);
+  assert.match(workflow, /Do not rewrite it as a handoff/);
+  assert.match(workflow, /absent from both the inherited history and the forwarded request/);
+  assert.match(workflow, /Use only native same-agent forks/);
+  assert.match(workflow, /source_message_url/);
+  assert.match(workflow, /channel containing the message, not its parent/);
+  assert.match(workflow, /Omit the parameter when the source message is unknown/);
+  assert.match(workflow, /does not append the caption or source metadata to the LLM input/);
+  assert.match(workflow, /Existing-thread replies do not accept this parameter/);
+  assert.match(workflow, /<#THREAD_ID>/);
+  assert.match(workflow, /Do not wait for answers before returning the links/);
+  assert.equal(workflow.includes(String.fromCharCode(0)), false);
 });
