@@ -42,6 +42,18 @@ test('skill is concise, references resolve, and MCP is an explicit prerequisite'
   for (const [, link] of links) assert.ok(existsSync(new URL(link, url)), link);
   const readme = readFileSync(new URL('README.md', root), 'utf8');
   assert.match(readme, /This plugin needs \[OpenClaw MCP\]/);
-  assert.match(readme, /openclaw plugins install git:github.com\/coccoinomane\/openclaw-discord-coordination@v0.1.0/);
+  assert.match(readme, /openclaw plugins install git:github.com\/coccoinomane\/openclaw-discord-coordination@v0.1.1/);
   assert.equal(readme.includes('\u0000'), false);
+});
+
+
+test('companion documentation has no obsolete fork compatibility guidance', () => {
+  const readme = readFileSync(new URL('README.md', root), 'utf8');
+  const workflow = readFileSync(new URL('skills/discord-thread-coordination/references/workflows.md', root), 'utf8');
+  assert.match(readme, /companion plugin/);
+  assert.match(readme, /Inspired by Claude Projects/);
+  assert.match(json('package.json').description, /Claude Projects/);
+  for (const text of [readme, workflow]) {
+    assert.doesNotMatch(text, /pull\/1|PR #1|when the advertised schema supports it|and the tool supports it|Never copy transcript messages/);
+  }
 });

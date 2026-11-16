@@ -1,6 +1,8 @@
 # Discord Coordination for OpenClaw
 
-An optional OpenClaw plugin containing the [discord-thread-coordination skill](skills/discord-thread-coordination/SKILL.md). It guides an OpenClaw agent when a user wants to open or resume Discord threads, continue work elsewhere, or split assignments across threads.
+A companion plugin for [OpenClaw MCP](https://github.com/coccoinomane/openclaw-mcp), containing the [discord-thread-coordination skill](skills/discord-thread-coordination/SKILL.md). It guides an OpenClaw agent when a user wants to open or resume Discord threads, continue work elsewhere, or split assignments across threads.
+
+Inspired by Claude Projects: use Discord channels as project spaces and threads as focused conversations, with OpenClaw handling the work.
 
 ## Required: OpenClaw MCP
 
@@ -8,23 +10,21 @@ An optional OpenClaw plugin containing the [discord-thread-coordination skill](s
 
 This repository supplies instructions, not the MCP server or Discord tools. It does not install dependencies, configure credentials, change routing, or check the MCP connection. It assumes the prerequisite is in place.
 
-Native forks additionally require a version of the MCP advertising fork_from_session on openclaw_discord_ask and a compatible Gateway. At initial publication that MCP change is under review in [PR #1](https://github.com/coccoinomane/openclaw-mcp/pull/1); do not assume it is deployed merely because this skill is installed. Forwarding and contextual handoffs do not require the fork parameter.
-
 ## Install
 
-On an OpenClaw version supporting native plugin skills:
+Install the companion:
 
 ```bash
-openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.1.0
+openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.1.1
 ```
 
-Review the normal installation prompts. Start a new conversation after installation so the agent receives the updated skill list. This is optional: using the MCP alone does not require this plugin.
+Review the normal installation prompts. Start a new conversation after installation so the agent receives the updated skill list. The MCP server and this companion are installed separately.
 
 ## Workflows
 
 - Forward a self-contained request to a new or existing Discord thread.
 - Hand off work with the relevant context and references to its source conversation.
-- Fork a same-agent OpenClaw session into a new thread when detailed history is useful and the tool supports it.
+- Fork a same-agent OpenClaw session into a new thread when detailed history is useful.
 
 The prompt sent for execution remains visible in the destination thread. The source conversation receives links to every destination, using native Discord mentions. Work continues there; this workflow does not aggregate answers back into the source.
 

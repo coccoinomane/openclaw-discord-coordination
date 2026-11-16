@@ -1,6 +1,6 @@
 # Discord forwarding and delegation
 
-Use the advertised MCP Discord tools to create or continue the thread and its associated OpenClaw conversation. Do not also create a session with a separate spawn mechanism. If Discord tools are unavailable, explain that limitation rather than inventing an alternative route.
+Use the MCP Discord tools to create or continue the thread and its associated OpenClaw conversation. Do not also create a session with a separate spawn mechanism.
 
 ## Choose where the work continues
 
@@ -22,11 +22,11 @@ The prompt submitted to the destination must be visible in Discord, as message t
 
 ## Fork availability
 
-Use `fork_from_session` on the new-thread tool when the advertised schema supports it. The fork inherits history through the last completed turn, so include any relevant decisions from the current, unfinished turn in the new assignment. An explicit model choice applies to the child only; otherwise the fork keeps inherited model settings.
+Use `fork_from_session` on the new-thread tool. The fork inherits history through the last completed turn, so include any relevant decisions from the current, unfinished turn in the new assignment. An explicit model choice applies to the child only; otherwise the fork keeps inherited model settings.
 
 Use only native same-agent forks. Obtain the source key from trusted runtime context or session lookup tools, not by guessing from a Discord ID. Forking creates a new conversation; it does not replace the history of an existing destination thread.
 
-If source and destination agents differ, use a handoff instead. If the user explicitly requested a fork and it is unavailable or incompatible, explain the limitation before substituting a handoff. Never copy transcript messages into a session to simulate a native fork.
+If source and destination agents differ, use a handoff instead. If the user explicitly requested a cross-agent fork, explain the same-agent limit before substituting a handoff.
 
 ## Return the destination
 

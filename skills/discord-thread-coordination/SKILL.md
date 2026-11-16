@@ -17,7 +17,7 @@ This skill requires [OpenClaw MCP](https://github.com/coccoinomane/openclaw-mcp)
 
 Honor the requested destination. For branches from a thread, its parent channel is the natural default. Resume an existing thread for continuing work; create separate threads when the user asks to isolate or parallelize assignments. Use the MCP workflow rather than also creating sessions through a separate spawn mechanism.
 
-Read [Forwarding, handoffs and forks](references/workflows.md) when choosing a destination or preparing the assignment. Tool descriptions define parameters and supported capabilities.
+Read [Forwarding, handoffs and forks](references/workflows.md) when choosing a destination or preparing the assignment. Tool descriptions define the parameters.
 
 ## Make the handoff visible
 
