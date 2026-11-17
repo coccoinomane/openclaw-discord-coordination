@@ -4,6 +4,8 @@ Use the MCP Discord tools to create or continue the thread and its associated Op
 
 ## Choose where the work continues
 
+Always pass `agent_id` to tools that accept it. Use your own agent ID from trusted OpenClaw runtime context unless explicitly delegating to another agent.
+
 Choose the agent first, then use `openclaw_discord_channels` with that `agent_id` to find its available channels. Honor an explicit destination within that list. When branching from an existing thread, its parent channel is the natural default. Ask only when the agent or destination remains genuinely ambiguous.
 
 Reuse a relevant thread when continuing the same work. Search active threads first; include archived threads when the user refers to a particular earlier conversation. An explicit request for new, separate threads takes precedence over reuse. Create one focused assignment per requested branch.
