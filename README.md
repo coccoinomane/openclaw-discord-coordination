@@ -6,13 +6,13 @@ Inspired by Claude Projects: use Discord channels as project spaces and threads 
 
 ## Required: OpenClaw MCP
 
-**This plugin needs [OpenClaw MCP 3.x](https://github.com/coccoinomane/openclaw-mcp) to function.** Connect the MCP to the agent, enable its Discord tools and configure the selected agent’s server/channel bindings in OpenClaw. See the [MCP Discord setup guide](https://github.com/coccoinomane/openclaw-mcp/blob/main/docs/discord-skills.md).
+**This plugin needs [OpenClaw MCP 4.x (unreleased)](https://github.com/coccoinomane/openclaw-mcp) to function.** Connect the MCP to the agent, enable its Discord tools and configure the selected agent’s server/channel bindings in OpenClaw. See the [MCP Discord setup guide](https://github.com/coccoinomane/openclaw-mcp/blob/main/docs/discord-skills.md).
 
 This repository supplies instructions, not the MCP server or Discord tools. It does not install dependencies, configure credentials, change routing, or check the MCP connection. It assumes the prerequisite is in place.
 
 ## Install
 
-Install the companion:
+The revised skill on this branch targets the upcoming MCP 4.x API. The published companion below supports MCP 3.x:
 
 ```bash
 openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.2.1
