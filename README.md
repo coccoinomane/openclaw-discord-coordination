@@ -6,7 +6,7 @@ Inspired by Claude Projects: use Discord channels as project spaces and threads 
 
 ## Required: OpenClaw MCP
 
-**This plugin needs [OpenClaw MCP](https://github.com/coccoinomane/openclaw-mcp) to function.** The MCP must already be connected to the agent, with Discord tools enabled and the intended channels configured. See the [MCP Discord setup guide](https://github.com/coccoinomane/openclaw-mcp/blob/main/docs/discord-skills.md).
+**This plugin needs [OpenClaw MCP 3.x](https://github.com/coccoinomane/openclaw-mcp) to function.** Connect the MCP to the agent, enable its Discord tools and configure the selected agent’s server/channel bindings in OpenClaw. See the [MCP Discord setup guide](https://github.com/coccoinomane/openclaw-mcp/blob/main/docs/discord-skills.md).
 
 This repository supplies instructions, not the MCP server or Discord tools. It does not install dependencies, configure credentials, change routing, or check the MCP connection. It assumes the prerequisite is in place.
 
@@ -15,7 +15,7 @@ This repository supplies instructions, not the MCP server or Discord tools. It d
 Install the companion:
 
 ```bash
-openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.1.3
+openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.2.0
 ```
 
 Review the normal installation prompts. Start a new conversation after installation so the agent receives the updated skill list. The MCP server and this companion are installed separately.
@@ -38,4 +38,4 @@ This skill is not exposed through MCP. The separate MCP repository retains the g
 
 ## Verification
 
-Run node --test for package, entrypoint and content checks. Tests verify metadata, skill description size, reference links and the MCP prerequisite. Installation and live Discord execution are separate checks; neither is performed by these tests.
+Run node --test for package, entrypoint and content checks. Tests verify metadata, skill description size and reference links. Installation and live Discord execution are separate checks; neither is performed by these tests.
