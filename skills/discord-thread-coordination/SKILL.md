@@ -7,7 +7,7 @@ description: Use when a user asks OpenClaw to open or resume a Discord thread, c
 
 Use this skill from any Discord conversation, including an existing thread; an inbox is only one possible starting point. Assume the user wants an associated OpenClaw session unless they explicitly request an empty thread.
 
-This skill requires [OpenClaw MCP 4.x (unreleased)](https://github.com/coccoinomane/openclaw-mcp), already configured with its Discord tools available. It supplies guidance only; it does not install or configure the MCP.
+This skill requires [OpenClaw MCP 4.x](https://github.com/coccoinomane/openclaw-mcp/releases/tag/v4.0.0), already configured with its Discord tools available. It supplies guidance only; it does not install or configure the MCP.
 
 ## Choose the continuation
 

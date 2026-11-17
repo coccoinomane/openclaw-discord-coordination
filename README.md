@@ -6,16 +6,16 @@ Inspired by Claude Projects: use Discord channels as project spaces and threads 
 
 ## Required: OpenClaw MCP
 
-**This plugin needs [OpenClaw MCP 4.x (unreleased)](https://github.com/coccoinomane/openclaw-mcp) to function.** Connect the MCP to the agent, enable its Discord tools and configure the selected agent’s server/channel bindings in OpenClaw. See the [MCP Discord setup guide](https://github.com/coccoinomane/openclaw-mcp/blob/main/docs/discord-skills.md).
+**This plugin needs [OpenClaw MCP 4.x](https://github.com/coccoinomane/openclaw-mcp/releases/tag/v4.0.0) to function.** Connect the MCP to the agent, enable its Discord tools and configure the selected agent’s server/channel bindings in OpenClaw. See the [MCP Discord setup guide](https://github.com/coccoinomane/openclaw-mcp/blob/main/docs/discord-skills.md).
 
 This repository supplies instructions, not the MCP server or Discord tools. It does not install dependencies, configure credentials, change routing, or check the MCP connection. It assumes the prerequisite is in place.
 
 ## Install
 
-The revised skill on this branch targets the upcoming MCP 4.x API. The published companion below supports MCP 3.x:
+Version 0.3.0 targets MCP 4.x and its explicit parameter names. Upgrade the MCP server and this companion together; this version does not support MCP 3.x.
 
 ```bash
-openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.2.1
+openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.3.0
 ```
 
 Review the normal installation prompts. Start a new conversation after installation so the agent receives the updated skill list. The MCP server and this companion are installed separately.
