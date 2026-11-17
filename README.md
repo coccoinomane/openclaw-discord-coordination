@@ -15,7 +15,7 @@ This repository supplies instructions, not the MCP server or Discord tools. It d
 Install the companion:
 
 ```bash
-openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.2.0
+openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.2.1
 ```
 
 Review the normal installation prompts. Start a new conversation after installation so the agent receives the updated skill list. The MCP server and this companion are installed separately.
