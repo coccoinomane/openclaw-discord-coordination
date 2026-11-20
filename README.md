@@ -12,10 +12,10 @@ This repository supplies instructions, not the MCP server or Discord tools. It d
 
 ## Install
 
-Version 0.3.0 targets MCP 4.x and its explicit parameter names. Upgrade the MCP server and this companion together; this version does not support MCP 3.x.
+Version 0.3.1 targets MCP 4.x and its explicit parameter names. Upgrade the MCP server and this companion together; this version does not support MCP 3.x.
 
 ```bash
-openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.3.0
+openclaw plugins install git:github.com/coccoinomane/openclaw-discord-coordination@v0.3.1
 ```
 
 Review the normal installation prompts. Start a new conversation after installation so the agent receives the updated skill list. The MCP server and this companion are installed separately.

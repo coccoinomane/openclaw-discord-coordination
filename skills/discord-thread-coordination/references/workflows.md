@@ -16,7 +16,7 @@ Creating a channel is a separate decision from creating a thread. Use the channe
 
 ## Prepare the prompt
 
-- **Forwarding:** preserve a self-contained work request, removing instructions that were only about finding or selecting its destination.
+- **Forwarding:** preserve the user's work request verbatim, removing only instructions about forwarding it or selecting its destination. Do not paraphrase or add introductions, summaries, context, or requirements unless the user explicitly asks you to improve or rewrite the prompt.
 - **Handoff:** prepare a self-contained assignment with the relevant decisions, materials and constraints from the originating conversation. Preserve the user's intent; do not add unrequested work. Include the source OpenClaw session key and usable conversation references when available and needed to retrieve more context. Without those references, supply enough context in the assignment itself.
 - **Fork:** preserve the user's work request verbatim, removing only instructions about creating the fork or selecting its destination. Do not rewrite it as a handoff or add a recap, inherited references, or new requirements. For multiple requested branches, forward the portion of the request relevant to each branch without changing its meaning.
 

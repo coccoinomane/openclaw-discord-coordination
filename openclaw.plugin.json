@@ -1,7 +1,7 @@
 {
   "id": "openclaw-discord-coordination",
   "name": "Discord Coordination",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "OpenClaw MCP companion for Discord thread coordination, inspired by Claude Projects. Requires OpenClaw MCP.",
   "skills": [
     "./skills"
